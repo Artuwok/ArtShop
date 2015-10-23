@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <title>ArtShop</title>
+</head>
+<body onload="fillTable()">
+
+<h1 align="center">Welcome to the ArtShop</h1>
+
+<input type="button" align="right" onclick="showCart();" value="Show cart"/>
+
+<div class="mainDiv">
+
+</div>
+
+<script type="text/javascript">
+
+    function fillTable () {
+        $.get("/notebooks/currentItem.json", function (data) {
+            $.each(data, function (i, itemToView) {
+
+                $(".mainDiv").append(
+                        '<div class="eee"><img src= "' + itemToView.imageUrl + '" + width="150px" height="100px"/>' + "<br>"
+                        + "<b>Item code: </b>" + itemToView.id + "<br>"
+                        + "<b>Item model: </b>" + itemToView.name + "<br>"
+                        + "<b>Price: </b>" + itemToView.price + " grn" + "<br>"
+                        + "<input id='itemToView.id' type='button' onclick='buyItem(\"" + itemToView.id + "\");' value='Add to Cart'/>"
+                        + "</div>"
+                );
+            });
+        });
+    }
+
+</script>
+
+<style>
+    .eee {
+        width: 200px;
+        height: 150px;
+        display: inline-block;
+        margin: 1%;
+        font-size: small;
+    }
+</style>
+
+
+<script type="text/javascript">
+    function buyItem(itemToView){
+        var URL = "/addToShoppingCart/" + itemToView;
+        var data={id: itemToView};
+        $.ajax({
+            type: "GET",
+            url: URL
+        },
+                location.reload(true));
+    }
+</script>
+
+<script type="text/javascript">
+
+    function showCart(){
+        window.location.href = "/showCart"
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <title>ArtShop</title>
+</head>
+<body>
+
+<h1 align="center">Your shop cart</h1>
+
+<div class="mainDiv">
+    <table class="cartTable">
+        <tr>
+            <th><b>Item code</b></th>
+            <th><b>Item name</b></th>
+            <th><b>Item price</b></th>
+            <th>Remove item</th>
+        </tr>
+
+        <script type="text/javascript">
+            var totalPrice = 0;
+            $.get("/showCart.json", function (data) {
+
+                $.each(data, function (i, itemToView) {
+                    totalPrice += itemToView.price;
+                    $(".cartTable").append(
+                            "<tr>" + "<td>" + itemToView.id + "</td>"
+                            + "<td>" + itemToView.name + "</td>"
+                            + "<td>" + itemToView.price + "</td>"
+                            + "<td>" + "<input type='button' onclick='removeItemFromCart(\"" + itemToView.id + "\");' value = 'Remove item'>"
+                            + "</td>"
+                            + "</tr>"
+                    );
+                });
+                $(".cartTable").append(
+                        "<tr>" + "<td><b>Total Price:</b></td>" + "<td></td><td><b>" + totalPrice + "</b></td>" + "<td> " +
+                        "<button id='makeOrderButton' onclick='showOrderForm();'>Make Order</button>" + "</td>" + "</tr>"
+                );
+            });
+        </script>
+    </table>
+</div>
+<br>
+
+<div class="orderDiv" hidden>
+
+    <b>Please, fill in the delivery details:</b>
+
+    <form>
+        <br>Enter your name: <br>
+        <input type="text" id="clientName"><br>
+        Contact lephone number:<br>
+        <input type="tel" id="clientTelephone"><br>
+        Delivery address: <br>
+        <input type=text id="deliveryAddress"><br>
+        Your email: <br>
+        <input type="email" id="clientEmail"><br>
+
+        <br>
+        <button onclick="createOrder();">Create Order</button>
+    </form>
+</div>
+
+<script type="text/javascript">
+
+    function createOrder() {
+        var clientName = document.getElementById("clientName").value;
+        var clientTelephone = document.getElementById("clientTelephone").value;
+        var deliveryAddress = document.getElementById("deliveryAddress").value;
+        var clientEmail = document.getElementById("clientEmail").value;
+
+        $.ajax({
+            url: '/addClientOrder',
+            type: 'POST',
+            data: JSON.stringify({
+                clientName: clientName, clientTelephone: clientTelephone,
+                deliveryAddress: deliveryAddress, clientEmail: clientEmail
+            }),
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            async: false/*,
+            success: function (msg) {
+                alert(msg);
+            }*/
+        });
+    }
+</script>
+
+<script type="text/javascript">
+
+    function showOrderForm() {
+        $('.orderDiv').toggle(800);
+    }
+</script>
+
+<script type="text/javascript">
+    function removeItemFromCart(itemToView) {
+        var URL = "/removeFromCart/" + itemToView;
+        $.ajax({
+                    type: "GET",
+                    url: URL
+                },
+                location.reload(true));
+    }
+</script>
+
+<style>
+
+    table {
+        position: absolute;
+        left: auto;
+        width: 80%; /* Ширина таблицы */
+        /*border: 4px double black;*/ /* Рамка вокруг таблицы */
+        border-collapse: collapse; /* Отображать только одинарные линии */
+    }
+
+    th {
+        text-align: left; /* Выравнивание по левому краю */
+        background: #ccc; /* Цвет фона ячеек */
+        padding: 5px; /* Поля вокруг содержимого ячеек */
+        border: 1px solid black; /* Граница вокруг ячеек */
+    }
+
+    td {
+        padding: 5px; /* Поля вокруг содержимого ячеек */
+        border: 1px solid black; /* Граница вокруг ячеек */
+    }
+
+    /*.cartTable{
+
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -khtml-border-radius: 10px;
+        border: 1px solid #000;
+        display: block;
+
+    }*/
+
+    .orderDiv {
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -100px;
+        margin-left: -130px;
+        width: 260px;
+        height: 240px;
+        border-radius: 10px;
+        border: 2px solid beige;
+        padding: 7px;
+        background-color: lightblue;
+        text-align: center;
+    }
+</style>
+
+</body>
+</html>
+
