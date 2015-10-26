@@ -25,7 +25,7 @@ public class OrderDAOImpl implements OrderDAO {
 
         KeyHolder keyHolder = new GeneratedKeyHolder(); // returns id of the inserted sql
         final String sql = "INSERT INTO ORDERS (ClientName, ClientTelephone, ClientAddress, ClientEmail) " +
-                "VALUES (?, ?, ?, ?)";
+                "VALUES (?, ?, ?, ?, ?)";
 
         jdbcTemplate.update(new PreparedStatementCreator() {
             @Override
@@ -35,6 +35,7 @@ public class OrderDAOImpl implements OrderDAO {
                 ps.setString(2, order.getClientTelephone());
                 ps.setString(3, order.getDeliveryAddress());
                 ps.setString(4, order.getClientEmail());
+                ps.setString(5,order.getOrderedItems());
                 return ps;
             }
         }, keyHolder);

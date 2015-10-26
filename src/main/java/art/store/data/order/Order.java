@@ -9,6 +9,7 @@ public class Order implements Serializable {
     private String clientTelephone;
     private String deliveryAddress;
     private String clientEmail;
+    private String orderedItems;
 
     public Order() {
     }
@@ -18,6 +19,7 @@ public class Order implements Serializable {
         this.clientName = clientName;
         this.clientTelephone = clientTelephone;
         this.deliveryAddress = deliveryAddress;
+        this.orderedItems = orderedItems;
     }
 
     public String getClientName() {
@@ -50,6 +52,14 @@ public class Order implements Serializable {
 
     public void setClientEmail(String clientEmail) {
         this.clientEmail = clientEmail;
+    }
+
+    public void setOrderedItems(String orderedItems) {
+        this.orderedItems = orderedItems;
+    }
+
+    public String getOrderedItems() {
+        return orderedItems;
     }
 
 

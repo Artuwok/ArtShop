@@ -1,75 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../../resources/css/styles.css">
+    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+    <script src="../../../resources/js/script.js"></script>
     <title>ArtShop</title>
 </head>
-<body>
+<body onload="fillAllNouts()">
 
-<h1 align="center">Welcome to the ArtShop</h1>
-
-<input type="button" align="right" onclick="showCart();" value="Show cart"/>
-
-<div class="mainDiv">
-    <script type="text/javascript">
-
-        $.get("/data.json", function (data) {
-            $.each(data, function (i, itemToView) {
-
-                $(".mainDiv").append(
-                        '<div class="eee"><img src= "' + itemToView.imageUrl + '" + width="150px" height="100px"/>' + "<br>"
-                        + "<b>Item code: </b>" + itemToView.id + "<br>"
-                        + "<b>Item model: </b>" + itemToView.name + "<br>"
-                        + "<b>Price: </b>" + itemToView.price + " grn" + "<br>"
-                        + "<input id='itemToView.id' type='button' onclick='sendId(\"" + itemToView.id + "\");' value='View Details'/>" + "</div>"
-                );
-            });
-        });
-
-    </script>
+<div class="cartJpj">
+    <input type="image" src="../../../resources/cart.jpg" width="58px" height="50px"
+           onclick="showCart();"/> <br>
 </div>
 
-<script type="text/javascript">
-    function sendId(itemToView) {
-        window.location.href = "/notebooks/" + itemToView;
-
-    }
-</script>
-
-<script type="text/javascript">
-
-    function showCart() {
-        window.location.href = "/showCart"
-    }
-
-</script>
+<h1 align="center">Welcome to the ArtShop</h1> <br>
 
 
-<style>
-    .eee {
-        width: 200px;
-        height: 150px;
-        display: inline-block;
-        margin: 1%;
-        font-size: small;
-    }
-</style>
+<div class="mainPartDiv">
+
+    <div id='cssmenu'>
+        <ul>
+            <li class='active'><a href='/'><span>Home</span></a></li>
+            <li class='has-sub'><a href='#'><span>Products</span></a>
+                <ul>
+                    <li><a href='/'><span>Notebooks</span></a></li>
+                </ul>
+            </li>
+            <li class='has-sub'><a href='#'><span>About</span></a>
+                <ul>
+                    <li><a href='#'><span>Company</span></a></li>
+                    <li class='last'><a href='#'><span>Contact</span></a></li>
+                </ul>
+            </li>
+            <li class='last'><a href='#'><span>Contact</span></a></li>
+        </ul>
+    </div>
 
 
+    <div class="mainDiv"> </div>
+</div>
 </body>
 </html>
 
-<!--
-<script type="text/javascript">
-    function sendId(itemToView){
-        var URL = "/notebooks/" + itemToView;
-        var data={id: itemToView};
-        $.ajax({
-            type: "GET",
-            url: URL,
-            data: data,
-            dataType : "json"
-        });
-    }
-</script>-->
+
