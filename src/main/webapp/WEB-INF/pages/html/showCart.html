@@ -68,9 +68,7 @@
 
 
 <div class="orderDiv" hidden>
-
     <b>Please, fill in the delivery details:</b>
-
     <form>
         <br>Enter your name: <br>
         <input type="text" id="clientName"><br>
@@ -80,7 +78,6 @@
         <input type=text id="deliveryAddress"><br>
         Your email: <br>
         <input type="email" id="clientEmail"><br>
-
         <br>
         <button onclick="createOrder();">Create Order</button>
     </form>
@@ -103,10 +100,18 @@
             }),
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
-            async: false/*,
-             success: function (msg) {
-             alert(msg);
-             }*/
+            async: false,
+            success: function (msg) {
+
+                /*function showOrderNumber(msg) {
+                 $('.orderConfirmed').show(800);
+                 }*/
+                alert('Thank you for makin an order! Your order number is:' + msg);
+            },
+
+            error: function () {
+                alert('Sorry, something went wrong')
+            }
         });
     }
 </script>
@@ -129,6 +134,9 @@
     }
 </script>
 
+<div class="orderConfirmed" hidden>
+    <h2>Thank you for making an order! Your order number is: </h2>
+</div>
 </body>
 </html>
 

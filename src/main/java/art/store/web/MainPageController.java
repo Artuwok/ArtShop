@@ -21,6 +21,10 @@ public class MainPageController {
     int id;
     @Autowired
     ItemDAO itemDAO;
+    @Autowired
+    CartDAO cartDAO;
+    @Autowired
+    OrderDAO orderDAO;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() {
@@ -37,7 +41,7 @@ public class MainPageController {
 
     @RequestMapping(value = "/notebooks/{id}", method = RequestMethod.GET)
     public String notebook(@PathVariable("id") int id) {
-            this.id = id;
+        this.id = id;
 
         System.out.println(id);
         return "notebook.html";
@@ -47,26 +51,21 @@ public class MainPageController {
     public
     @ResponseBody
     ArrayList<Item> listID() {
-        ArrayList<Item> itemToViewList = (ArrayList)itemDAO.getItemToView(id);
+        ArrayList<Item> itemToViewList = (ArrayList) itemDAO.getItemToView(id);
         return itemToViewList;
 
     }
 
-    @Autowired CartDAO cartDAO;
     @RequestMapping(value = "/addToShoppingCart/{id}", method = RequestMethod.GET)
-    public void addToShoppingCart (@PathVariable("id") int id) {
+    public void addToShoppingCart(@PathVariable("id") int id) {
         this.id = id;
-
-        System.out.println("Hello from addToShopping cart Controller!!: " + id);
         List<Item> list = cartDAO.addToCart(id);
-        System.out.println(list.size());
     }
 
     @RequestMapping(value = "/showCart", method = RequestMethod.GET)
-    public String showCartPage(){
+    public String showCartPage() {
         return "showCart.html";
     }
-
 
     @RequestMapping(value = "/showCart.json", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public
@@ -78,19 +77,21 @@ public class MainPageController {
     }
 
     @RequestMapping(value = "/removeFromCart/{itemToRemoveID}", method = RequestMethod.GET)
-    public String removeItemFromCart(@PathVariable ("itemToRemoveID") int itemToRemoveID) {
-
-        System.out.println("Before cart.Dao.removefromCart: " + itemToRemoveID);
+    public String removeItemFromCart(@PathVariable("itemToRemoveID") int itemToRemoveID) {
         cartDAO.removeFromCart(itemToRemoveID);
-
-        System.out.println("The item has been removed: " + itemToRemoveID);
         return "showCart.html";
     }
 
-    @Autowired OrderDAO orderDAO;
-    @RequestMapping(value = "/addClientOrder", method = RequestMethod.POST)
-    public void addClientOrder(@RequestBody Order json){
-       int orderID = orderDAO.saveOrder(json);
-        System.out.println("Order was confermed! Order number is: " + orderID);
+    @RequestMapping(value = "/addClientOrder", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public
+    @ResponseBody
+    List<Integer> addClientOrder(@RequestBody Order json) {
+        List<Integer> listToreturn = new ArrayList<Integer>();
+
+        int order = orderDAO.saveOrder(json, cartDAO.getItemsToOrderSave());
+
+        listToreturn.add(order);
+        return listToreturn;
     }
+
 }

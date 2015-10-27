@@ -12,4 +12,6 @@ public interface CartDAO {
     List<Item> addToCart (int id);
     List<Item> showCart ();
     List<Item> removeFromCart(int itemId);
+
+    String getItemsToOrderSave();
 }

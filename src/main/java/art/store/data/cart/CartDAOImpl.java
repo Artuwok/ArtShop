@@ -14,13 +14,10 @@ import java.util.List;
 public class CartDAOImpl implements CartDAO {
     @Autowired
     private JdbcTemplate jdbcTemplate;
-
-    public CartDAOImpl() {
-        System.out.println("Cart DAOImpl created");
-    }
-
     private List<Item> cartList = new ArrayList<Item>();
 
+    public CartDAOImpl() {
+    }
 
     @Override
     public List<Item> addToCart(int id) {
@@ -38,10 +35,10 @@ public class CartDAOImpl implements CartDAO {
     public List<Item> removeFromCart(int itemId) {
         Iterator iterator = cartList.iterator();
 
-        while (iterator.hasNext()){
+        while (iterator.hasNext()) {
             Item item = (Item) iterator.next();
             System.out.println("Iterator work");
-            if (item.getId() == itemId){
+            if (item.getId() == itemId) {
                 iterator.remove();
                 System.out.println("Iterator worked removed " + cartList.size());
             }
@@ -49,4 +46,15 @@ public class CartDAOImpl implements CartDAO {
         }
         return cartList;
     }
+
+    @Override
+    public String getItemsToOrderSave() {
+        StringBuilder sb = new StringBuilder();
+
+        for (Item item : cartList) {
+            sb.append(item.getId() + " ");
+        }
+        return sb.toString();
+    }
+
 }
