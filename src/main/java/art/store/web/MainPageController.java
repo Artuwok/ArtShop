@@ -31,7 +31,7 @@ public class MainPageController {
         return "index.html";
     }
 
-    @RequestMapping(value = "/data.json", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/data/.json", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public
     @ResponseBody
     ResponseEntity<List<Item>> list() {
@@ -78,6 +78,7 @@ public class MainPageController {
 
     @RequestMapping(value = "/removeFromCart/{itemToRemoveID}", method = RequestMethod.GET)
     public String removeItemFromCart(@PathVariable("itemToRemoveID") int itemToRemoveID) {
+        System.out.println("REMOVE FROM CART!!!!!!!!!!!!");
         cartDAO.removeFromCart(itemToRemoveID);
         return "showCart.html";
     }

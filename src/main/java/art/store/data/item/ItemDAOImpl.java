@@ -12,17 +12,10 @@ public class ItemDAOImpl implements ItemDAO {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    /*Should have default constructor to create a bean*/
-    public ItemDAOImpl() {
-    }
-
 
     @Override
     public List<Item> getAllItems() {
-
         String sql = "SELECT * FROM ITEMS";
-        System.out.println("All item selected to show on the page");
-
         return this.jdbcTemplate.query(sql, new ItemRowMapper());
     }
 

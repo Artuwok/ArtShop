@@ -57,7 +57,7 @@ function fillOneNoutTable() {
 }
 
 function fillAllNouts () {
-    $.get("/data.json", function (data) {
+    $.get("/data/.json", function (data) {
         $.each(data, function (i, itemToView) {
 
             $(".mainDiv").append(

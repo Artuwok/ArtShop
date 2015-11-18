@@ -4,9 +4,9 @@ import art.store.data.item.Item;
 
 import java.util.List;
 
-/**
- * Created by art on 20/10/15.
- */
+
+/* This interface used to describe contract methods that Cart object should have */
+
 public interface CartDAO {
 
     List<Item> addToCart (int id);
@@ -15,3 +15,4 @@ public interface CartDAO {
 
     String getItemsToOrderSave();
 }
+
