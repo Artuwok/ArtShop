@@ -19,7 +19,6 @@ public class Order implements Serializable {
         this.clientName = clientName;
         this.clientTelephone = clientTelephone;
         this.deliveryAddress = deliveryAddress;
-        this.orderedItems = orderedItems;
     }
 
     public String getClientName() {
@@ -54,12 +53,12 @@ public class Order implements Serializable {
         this.clientEmail = clientEmail;
     }
 
-    public void setOrderedItems(String orderedItems) {
-        this.orderedItems = orderedItems;
-    }
-
     public String getOrderedItems() {
         return orderedItems;
+    }
+
+    public void setOrderedItems(String orderedItems) {
+        this.orderedItems = orderedItems;
     }
 
 

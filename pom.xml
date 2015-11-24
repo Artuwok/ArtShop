@@ -1,4 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.springapp</groupId>
@@ -10,6 +10,7 @@
     <properties>
         <spring.version>4.1.1.RELEASE</spring.version>
     </properties>
+
 
     <dependencies>
         <dependency>
@@ -54,10 +55,11 @@
             <version>2.6.2</version>
         </dependency>
 
-       <!-- <dependency>
-            <groupId></groupId>
-            <artifactId></artifactId>
-        </dependency>-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate</artifactId>
+            <version>3.5.4-Final</version>
+        </dependency>
 
         <dependency>
             <groupId>javax.servlet.jsp</groupId>
