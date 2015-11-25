@@ -1,19 +1,19 @@
 package art.store.data.cart;
 
 import art.store.data.item.Item;
-import art.store.data.item.ItemRowMapper;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 @Repository
 public class CartDAOImpl implements CartDAO {
+
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private SessionFactory sessionFactory;
     private List<Item> cartList = new ArrayList<Item>();
 
     public CartDAOImpl() {
@@ -21,8 +21,8 @@ public class CartDAOImpl implements CartDAO {
 
     @Override
     public List<Item> addToCart(int id) {
-        String sql = "SELECT * FROM ITEMS WHERE ID = " + id;
-        cartList.addAll(this.jdbcTemplate.query(sql, new ItemRowMapper()));
+        Session session = sessionFactory.openSession();
+        cartList.add((Item) session.get(Item.class, id));
         return cartList;
     }
 
@@ -32,17 +32,13 @@ public class CartDAOImpl implements CartDAO {
     }
 
     @Override
-    public List<Item> removeFromCart(int itemId) {
-        Iterator iterator = cartList.iterator();
+    public List<Item> removeFromCart(int itemToRemoveId) {
 
-        while (iterator.hasNext()) {
-            Item item = (Item) iterator.next();
-            System.out.println("Iterator work");
-            if (item.getId() == itemId) {
-                iterator.remove();
-                System.out.println("Iterator worked removed " + cartList.size());
+        for (Item itemInCart : cartList) {
+            if (itemInCart.getId() == itemToRemoveId) {
+                cartList.remove(itemInCart);
+                break;
             }
-            break;
         }
         return cartList;
     }

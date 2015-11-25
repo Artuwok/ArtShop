@@ -43,7 +43,7 @@ public class MainPageController {
     public String notebook(@PathVariable("id") int id) {
         this.id = id;
 
-        System.out.println(id);
+        System.out.println("--From notebooks id--" + id);
         return "notebook.html";
     }
 
@@ -78,7 +78,6 @@ public class MainPageController {
 
     @RequestMapping(value = "/removeFromCart/{itemToRemoveID}", method = RequestMethod.GET)
     public String removeItemFromCart(@PathVariable("itemToRemoveID") int itemToRemoveID) {
-        System.out.println("REMOVE FROM CART!!!!!!!!!!!!");
         cartDAO.removeFromCart(itemToRemoveID);
         return "showCart.html";
     }
@@ -87,11 +86,11 @@ public class MainPageController {
     public
     @ResponseBody
     List<Integer> addClientOrder(@RequestBody Order json) {
+//        TODO refactor method to return no list. but JSON String
+
         List<Integer> listToreturn = new ArrayList<Integer>();
-
-        int order = orderDAO.saveOrder(json, cartDAO.getItemsToOrderSave());
-
-        listToreturn.add(order);
+        int orderNumber = orderDAO.saveOrder(json, cartDAO.getItemsToOrderSave());
+        listToreturn.add(orderNumber);
         return listToreturn;
     }
 

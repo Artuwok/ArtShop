@@ -3,56 +3,63 @@ package art.store.data.item;
 /* This class represents business logic and serves as MODEL in MVC
 * Class represent ItemToSell to be viewed in the online store (web-app) */
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "ITEMS")
 public class Item {
 
-    private long id;
+    @Id
+    private int id;
     private float price;
     private String name;
-    private String imageUrl;
+    private String image_url;
     private String description;
 
 
     public Item() {
     }
 
-    public Item(long id, String name, float price) {
+    public Item(int id, String name, float price) {
         this.id = id;
         this.name = name;
         this.price = price;
-        this.imageUrl = imageUrl;
+        this.image_url = image_url;
         this.description = description;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public long getId() {
         return this.id;
     }
 
-    public void setPrice(float price) {
-        this.price = price;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public float getPrice() {
         return price;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPrice(float price) {
+        this.price = price;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setImageUrl(String imageUlr) {
-        this.imageUrl = imageUlr;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImage_url() {
+        return image_url;
+    }
+
+    public void setImage_url(String imageUlr) {
+        this.image_url = imageUlr;
     }
 
     public String getDescription() {

@@ -6,8 +6,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 
 import javax.sql.DataSource;
+import java.util.Properties;
 
 @Configuration
 public class DAOConfig {
@@ -32,5 +34,20 @@ public class DAOConfig {
         System.out.println("Datasource created!!!!!!!!!!!!!!!!");
 
         return dataSource;
+    }
+
+    @Bean
+    @Autowired
+    public LocalSessionFactoryBean sessionFactory(DataSource dataSource) {
+        LocalSessionFactoryBean sfb = new LocalSessionFactoryBean();
+        sfb.setDataSource(dataSource);
+        sfb.setPackagesToScan(new String[]{"art.store"});
+        Properties properties = new Properties();
+        properties.setProperty("dialect", "org.hibernate.dialect.MySQLDialect");
+        sfb.setHibernateProperties(properties);
+
+        System.out.println("LocalSessionFactoryBeanCreated!!!! ");
+        return sfb;
+
     }
 }

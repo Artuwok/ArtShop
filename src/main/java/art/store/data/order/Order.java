@@ -1,10 +1,19 @@
 package art.store.data.order;
 
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 
+@Entity
+@Table(name = "ORDERS")
 public class Order implements Serializable {
 
+    @Id
+    @GeneratedValue
+    private int id;
     private String clientName;
     private String clientTelephone;
     private String deliveryAddress;
@@ -19,6 +28,14 @@ public class Order implements Serializable {
         this.clientName = clientName;
         this.clientTelephone = clientTelephone;
         this.deliveryAddress = deliveryAddress;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getClientName() {

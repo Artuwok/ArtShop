@@ -44,7 +44,7 @@ function fillOneNoutTable() {
         $.each(data, function (i, itemToView) {
 
             $(".oneNoutClass").append(
-                '<div class="fillOneNoutDetails"><img src= "' + itemToView.imageUrl + '" + width="400px" height="300px"/>' + "<br>"
+                '<div class="fillOneNoutDetails"><img src= "' + itemToView.image_url + '" + width="400px" height="300px"/>' + "<br>"
                 + "<b>Item code: </b>" + itemToView.id + "<br>"
                 + "<b>Item model: </b>" + itemToView.name + "<br>"
                 + "<b>Price: </b>" + itemToView.price + " grn" + "<br>"
@@ -56,12 +56,12 @@ function fillOneNoutTable() {
     });
 }
 
-function fillAllNouts () {
+function fillAllNouts() {
     $.get("/data/.json", function (data) {
         $.each(data, function (i, itemToView) {
 
             $(".mainDiv").append(
-                '<div class="oneNoutDiv"><img src= "' + itemToView.imageUrl + '" + width="150px" height="100px"/>' + "<br>"
+                '<div class="oneNoutDiv"><img src= "' + itemToView.image_url + '" + width="150px" height="100px"/>' + "<br>"
                 + "<b>Item code: </b>" + itemToView.id + "<br>"
                 + "<b>Item model: </b>" + itemToView.name + "<br>"
                 + "<b>Price: </b>" + itemToView.price + " grn" + "<br>"
