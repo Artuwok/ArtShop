@@ -24,8 +24,8 @@
 
         <dependency>
             <groupId>org.hibernate</groupId>
-            <artifactId>hibernate</artifactId>
-            <version>3.5.4-Final</version>
+            <artifactId>hibernate-core</artifactId>
+            <version>4.2.20.Final</version>
         </dependency>
 
         <dependency>

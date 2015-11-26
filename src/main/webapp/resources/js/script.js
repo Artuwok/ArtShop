@@ -1,7 +1,7 @@
 (function ($) {
     $(document).ready(function () {
         $('#cssmenu > ul > li > a').click(function () {
-            $('#cssmenu li').removeClass('active');
+            $('#cssmenu').find('li').removeClass('active');
             $(this).closest('li').addClass('active');
             var checkElement = $(this).next();
             if ((checkElement.is('ul')) && (checkElement.is(':visible'))) {

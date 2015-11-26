@@ -12,9 +12,9 @@ import java.util.List;
 @Repository
 public class CartDAOImpl implements CartDAO {
 
+    private final List<Item> cartList = new ArrayList<Item>();
     @Autowired
     private SessionFactory sessionFactory;
-    private List<Item> cartList = new ArrayList<Item>();
 
     public CartDAOImpl() {
     }
@@ -32,7 +32,7 @@ public class CartDAOImpl implements CartDAO {
     }
 
     @Override
-    public List<Item> removeFromCart(int itemToRemoveId) {
+    public void removeFromCart(int itemToRemoveId) {
 
         for (Item itemInCart : cartList) {
             if (itemInCart.getId() == itemToRemoveId) {
@@ -40,7 +40,6 @@ public class CartDAOImpl implements CartDAO {
                 break;
             }
         }
-        return cartList;
     }
 
     @Override

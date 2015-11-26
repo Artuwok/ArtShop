@@ -93,11 +93,11 @@
 }
 
 #cssmenu > ul > li.has-sub > a span {
-    background: url(../../WEB-INF/pages/html/images/icon_plus.png) 98% center no-repeat;
+    background: url(../../resources/images/icon_plus.png) 98% center no-repeat;
 }
 
 #cssmenu > ul > li.has-sub.active > a span {
-    background: url(../../WEB-INF/pages/html/images/icon_minus.png) 98% center no-repeat;
+    background: url(../../resources/images/icon_minus.png) 98% center no-repeat;
 }
 
 /* Sub menu */

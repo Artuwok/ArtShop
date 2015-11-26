@@ -18,13 +18,13 @@ import java.util.List;
 
 @Controller
 public class MainPageController {
-    int id;
     @Autowired
     ItemDAO itemDAO;
     @Autowired
     CartDAO cartDAO;
     @Autowired
     OrderDAO orderDAO;
+    private int id;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() {
@@ -51,15 +51,13 @@ public class MainPageController {
     public
     @ResponseBody
     ArrayList<Item> listID() {
-        ArrayList<Item> itemToViewList = (ArrayList) itemDAO.getItemToView(id);
-        return itemToViewList;
-
+        return (ArrayList) itemDAO.getItemToView(id);
     }
 
     @RequestMapping(value = "/addToShoppingCart/{id}", method = RequestMethod.GET)
     public void addToShoppingCart(@PathVariable("id") int id) {
         this.id = id;
-        List<Item> list = cartDAO.addToCart(id);
+        cartDAO.addToCart(id);
     }
 
     @RequestMapping(value = "/showCart", method = RequestMethod.GET)

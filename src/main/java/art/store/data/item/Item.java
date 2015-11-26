@@ -26,8 +26,6 @@ public class Item {
         this.id = id;
         this.name = name;
         this.price = price;
-        this.image_url = image_url;
-        this.description = description;
     }
 
     public long getId() {
